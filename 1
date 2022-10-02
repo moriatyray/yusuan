@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespeace std;
+const int N = 25, M = 30000;//N物品个数，M最多钱
+int w[N], v[M];//重要度，价值
+int dp[M];//dp为总容量为M时最大
+int main() {
+	int C, n;//现在花了的钱数C，现在物品个数n
+	cin >> C >> n;
+	for (int i=1;i<=n;i++)
+	{
+		int p;//p重要程度
+		cin >> w[i] >> p;
+		v[i] = w[i] * p;
+	}
+	for (int i = 1; i <= n; i++) {//每一个物品
+		for (int j = C; j >= w[i]; j--)//
+		{
+			dp[j] = max(dp[j], dp[j - w[i]] + v[i]);
+		}
+	}
+	cout << dp[C];//花了C时最多东西
+	return 0;
+}
+
+
